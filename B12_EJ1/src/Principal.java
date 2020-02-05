@@ -1,16 +1,45 @@
 public class Principal {
 	public static void main(String[] args) {
-		int bHora, bMinuto, bSegundo;
-		bHora= (int) ValidaLibrary.valida("Dime una hora", 0, 24, 1);
-		bMinuto= (int) ValidaLibrary.valida("Dime unos minutos", 0, 60, 1);
-		bSegundo= (int) ValidaLibrary.valida("Dime unos segundos", 0, 60, 1);
+		int bHora = 0, bMinuto= 0, bSegundo= 0;
+		boolean errorControl = true;
+		//Escepcion de hora
+		while (errorControl) {
+			try {
+				bHora= (int) ValidaLibrary.valida("Dime una hora", 0, 24, 1); 
+				errorControl = false;
+			} catch (NumberFormatException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		
+		//Excepcion de Minutos
+		errorControl=true;
+		while (errorControl) {
+			try {
+				bMinuto= (int) ValidaLibrary.valida("Dime unos minutos", 0, 60, 1); 
+				errorControl = false;
+			} catch (NumberFormatException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		//Excepcion de Segundos
+		errorControl=true;
+		while (errorControl) {
+			try {
+				bSegundo= (int) ValidaLibrary.valida("Dime unos segundos", 0, 60, 1); 
+				errorControl = false;
+			} catch (NumberFormatException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+
 		Reloj r1 = new Reloj(bHora, bMinuto, bSegundo);
 		System.out.println(r1.formato24());
 		System.out.println(r1.formato12());
-		r1.ponerHora((byte) 21, (byte) 10);
+		r1.ponerHora(bHora, bMinuto);
 		System.out.println(r1.formato24());
-		r1.ponerHora((byte) 20, (byte) 50, (byte) 38);
+		r1.ponerHora(bHora, bMinuto, bSegundo);
 		System.out.println(r1.formato24());
-		r1.ponerHora((byte) 7, (byte) 28, (byte) 52, "PM");
+		r1.ponerHora(bHora, bMinuto, bSegundo, "PM");
 	}
 }

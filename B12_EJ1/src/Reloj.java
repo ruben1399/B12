@@ -74,23 +74,23 @@ public class Reloj {
 		return sResultado;
 	}
 
-	public void ponerHora(Byte bHora, Byte bMinuto) {
+	public void ponerHora(int bHora, int bMinuto) {
 		setbHora(bHora);
 		setbMinuto(bMinuto);
-		setbSegundo((byte) 0);
+		setbSegundo((int) 0);
 	}
 
-	public void ponerHora(Byte bHora, Byte bMinuto, Byte bSegundo) {
+	public void ponerHora(int bHora, int bMinuto, int bSegundo) {
 		ponerHora(bHora, bMinuto);
 		setbSegundo(bSegundo);
 	}
 
-	public void ponerHora(Byte bHora, Byte bMinuto, Byte bSegundo, String franjaHoraria) {
+	public void ponerHora(int bHora, int bMinuto, int bSegundo, String franjaHoraria) {
 
 		if (franjaHoraria.equals("am")) {
 			ponerHora(bHora, bMinuto, bSegundo);
 		} else {
-			ponerHora((byte) (bHora + 12), bMinuto, bSegundo);
+			ponerHora((int) (bHora + 12), bMinuto, bSegundo);
 		}
 	}
 }
