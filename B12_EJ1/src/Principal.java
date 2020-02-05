@@ -1,7 +1,10 @@
-public class Boletin9_P1 {
+public class Principal {
 	public static void main(String[] args) {
-		byte bHora, bMinuto, bSegundo;
-		Reloj r1 = new Reloj((byte) 20, (byte) 2, (byte) 12);
+		int bHora, bMinuto, bSegundo;
+		bHora= (int) ValidaLibrary.valida("Dime una hora", 0, 24, 1);
+		bMinuto= (int) ValidaLibrary.valida("Dime unos minutos", 0, 60, 1);
+		bSegundo= (int) ValidaLibrary.valida("Dime unos segundos", 0, 60, 1);
+		Reloj r1 = new Reloj(bHora, bMinuto, bSegundo);
 		System.out.println(r1.formato24());
 		System.out.println(r1.formato12());
 		r1.ponerHora((byte) 21, (byte) 10);

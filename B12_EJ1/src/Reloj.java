@@ -1,25 +1,19 @@
 public class Reloj {
-	private byte bHora;
-	private byte bMinuto;
-	private byte bSegundo;
+	private int bHora;
+	private int bMinuto;
+	private int bSegundo;
 
-	public Reloj() {
-		setbHora((byte) 0);
-		setbMinuto((byte) 0);
-		setbSegundo((byte) 0);
-	}
-
-	public Reloj(byte bHora, byte bMinuto, byte bSegundo) {
+	public Reloj(int bHora, int bMinuto, int bSegundo) {
 		setbHora(bHora);
 		setbMinuto(bMinuto);
 		setbSegundo(bSegundo);
 	}
 
-	public byte getbHora() {
+	public int getbHora() {
 		return bHora;
 	}
 
-	public boolean setbHora(byte bHora) {
+	public boolean setbHora(int bHora) {
 		boolean bExito = false;
 		if (bHora >= 0 && bHora < 24) {
 			this.bHora = bHora;
@@ -28,11 +22,11 @@ public class Reloj {
 		return bExito;
 	}
 
-	public byte getbMinuto() {
+	public int getbMinuto() {
 		return bMinuto;
 	}
 
-	public boolean setbMinuto(byte bMinuto) {
+	public boolean setbMinuto(int bMinuto) {
 		boolean bExito = false;
 		if (bMinuto >= 0 && bMinuto < 60) {
 			this.bMinuto = bMinuto;
@@ -41,11 +35,11 @@ public class Reloj {
 		return bExito;
 	}
 
-	public byte getbSegundo() {
+	public int getbSegundo() {
 		return bSegundo;
 	}
 
-	public boolean setbSegundo(byte bSegundo) {
+	public boolean setbSegundo(int bSegundo) {
 		boolean bExito = false;
 		if (bSegundo >= 0 && bSegundo < 60) {
 			this.bSegundo = bSegundo;
