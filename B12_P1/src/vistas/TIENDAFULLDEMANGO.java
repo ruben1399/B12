@@ -1,10 +1,14 @@
 package vistas;
 
+import modelo.articulo;
+
 public class TIENDAFULLDEMANGO {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		articulo artc = new articulo(1, "Satisfayer", 50);
+		artc.validarArticulo();
+		System.out.println(artc);
 	}
+
 
 }

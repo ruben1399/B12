@@ -1,14 +1,12 @@
 package modelo;
 
-import javax.print.attribute.standard.MediaSize.Other;
-
-public class articulo {
+public class articulo implements IArticulo {
 	private int Id;
 	private String sNombre;
 	private double dPrecio;
 
-	public articulo(int id, String sNombre, double dPrecio) {
-		setId(id);
+	public articulo(int Id, String sNombre, double dPrecio) {
+		setId(Id);
 		setsNombre(sNombre);
 		setdPrecio(dPrecio);
 	}
@@ -35,8 +33,15 @@ public class articulo {
 		return Id;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	private boolean setId(int Id) {
+		boolean bExito = false;
+		if (Id > 0 && Id < 1000) {
+			this.Id = Id;
+			bExito = true;
+		} else {
+			this.Id = -1;
+		}
+		return bExito;
 	}
 
 	public String getsNombre() {
@@ -46,8 +51,11 @@ public class articulo {
 	public boolean setsNombre(String sNombre) {
 		boolean bExito = false;
 		if (sNombre.length() < 20 && sNombre != null) {
-			bExito = true;
 			this.sNombre = sNombre;
+			bExito = true;
+
+		} else {
+			sNombre = null;
 		}
 		return bExito;
 	}
@@ -59,8 +67,11 @@ public class articulo {
 	public boolean setdPrecio(double dPrecio) {
 		boolean bExito = false;
 		if (dPrecio > 0) {
-			bExito = true;
 			this.dPrecio = dPrecio;
+			bExito = true;
+
+		} else {
+			dPrecio = -1;
 		}
 		return bExito;
 	}
@@ -74,4 +85,12 @@ public class articulo {
 		return sResultado;
 	}
 
+	public boolean validarArticulo() {
+		boolean bExito = false;
+		if (this.Id != -1 && this.dPrecio != -1 && this.sNombre != null) {
+			bExito = true;
+
+		}
+		return bExito;
+	}
 }
