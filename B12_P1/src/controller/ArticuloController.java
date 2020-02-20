@@ -2,7 +2,7 @@ package controller;
 
 import modelo.articulo;
 
-public class ArticuloController implements ICrud {
+public class ArticuloController implements ICrud <articulo> {
 	private articulo[] arrayArticulo;
 	private final int MAXARTICULO = 50;
 	private int contadorArticulos;
@@ -13,26 +13,24 @@ public class ArticuloController implements ICrud {
 	}
 
 
-	public articulo[] getArrayArticulo() {
+	@Override
+	public articulo[] getArray() {
 		return arrayArticulo;
 	}
 
 	
-	public void setArrayArticulo(articulo[] arrayArticulo) {
-		this.arrayArticulo = arrayArticulo;
-	}
 
 
-	public int getContadorArticulos() {
+
+	@Override
+	public int getContador() {
 		return contadorArticulos;
 	}
 
 
-	public void setContadorArticulos(int contadorArticulos) {
-		this.contadorArticulos = contadorArticulos;
-	}
 
 	//// CRUD
+	
 	@Override
 	public int search(articulo Object) {
 		int iPosicion = -1;
@@ -46,6 +44,7 @@ public class ArticuloController implements ICrud {
 		return iPosicion;
 	}
 
+
 	@Override
 	public boolean add(articulo Object) {
 		boolean bExito = false;
@@ -57,8 +56,8 @@ public class ArticuloController implements ICrud {
 		return bExito;
 	}
 
-	@Override
-	public boolean remove(articulo Object) {
+		@Override
+		public boolean remove(articulo Object) {
 		boolean bExito = false;
 		int iPosicion = search(Object);
 		if (iPosicion != -1) {
@@ -71,6 +70,7 @@ public class ArticuloController implements ICrud {
 		}
 		return bExito;
 	}
+	
 	
 	@Override
 	public boolean update (articulo Object) {

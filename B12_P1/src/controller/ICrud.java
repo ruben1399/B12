@@ -1,16 +1,17 @@
 package controller;
 
-import modelo.articulo;
+public interface ICrud <T> {
 
-public interface ICrud {
+	public T[] getArray();
 
-	
-	public int search(articulo Object);
+	public int getContador();
 
-	public boolean add(articulo Object);
+	public int search(T Object);
 
-	public boolean remove(articulo Object);
+	public boolean add(T Object);
 
-	public boolean update(articulo Object);
+	public boolean remove(T Object);
+
+	public boolean update(T Object);
 
 }
