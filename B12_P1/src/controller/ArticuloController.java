@@ -2,9 +2,8 @@ package controller;
 
 import modelo.articulo;
 
-public class ArticuloController implements ICrud <articulo> {
+public class ArticuloController implements ICrud <articulo>, IArticuloController {
 	private articulo[] arrayArticulo;
-	private final int MAXARTICULO = 50;
 	private int contadorArticulos;
 
 	public ArticuloController() {

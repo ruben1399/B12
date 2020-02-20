@@ -2,9 +2,8 @@ package controller;
 
 import modelo.cliente;
 
-public class ClienteController implements ICrud <cliente>{
+public class ClienteController implements ICrud <cliente>, IClienteController{
 	private cliente[] Array;
-	private final int MAXCLIENTE = 100;
 	private int Contador;
 
 	public ClienteController() {
