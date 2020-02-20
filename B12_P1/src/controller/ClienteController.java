@@ -1,7 +1,6 @@
 package controller;
 
 import modelo.cliente;
-import modelo.cliente;
 
 public class ClienteController implements ICrud <cliente>{
 	private cliente[] Array;
