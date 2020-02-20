@@ -1,5 +1,8 @@
 package controller;
 
+import modelo.cliente;
+
 public interface IClienteController {
-	private final int MAXCLIENTE = 100;
+	public final int MAXCLIENTE = 100;
+	public String mostrarClientes();
 }

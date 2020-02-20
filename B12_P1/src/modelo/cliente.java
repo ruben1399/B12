@@ -52,7 +52,14 @@ public class cliente implements ICliente {
 	}
 
 
-	
+	@Override
+	public String toString() {
+		String sResultado = "";
+		sResultado += "Id Cliente: " + getIdCliente() + "\n";
+		sResultado += "Cliente: " + getsNombre() + "\n";
+		sResultado += "Precio: " + getiSaldo() + "\n";
+		return sResultado;
+	}
 	@Override
 	public boolean validarCliente() {
 		boolean bExito = false;

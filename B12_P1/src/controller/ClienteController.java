@@ -2,7 +2,7 @@ package controller;
 
 import modelo.cliente;
 
-public class ClienteController implements ICrud <cliente>, IClienteController{
+public class ClienteController implements ICrud<cliente>, IClienteController {
 	private cliente[] Array;
 	private int Contador;
 
@@ -10,10 +10,12 @@ public class ClienteController implements ICrud <cliente>, IClienteController{
 		Contador = 0;
 		Array = new cliente[MAXCLIENTE];
 	}
+
 	@Override
 	public cliente[] getArray() {
 		return Array;
 	}
+
 	@Override
 	public int getContador() {
 		return Contador;
@@ -32,7 +34,6 @@ public class ClienteController implements ICrud <cliente>, IClienteController{
 		return iPosicion;
 	}
 
-
 	@Override
 	public boolean add(cliente Object) {
 		boolean bExito = false;
@@ -44,8 +45,8 @@ public class ClienteController implements ICrud <cliente>, IClienteController{
 		return bExito;
 	}
 
-		@Override
-		public boolean remove(cliente Object) {
+	@Override
+	public boolean remove(cliente Object) {
 		boolean bExito = false;
 		int iPosicion = search(Object);
 		if (iPosicion != -1) {
@@ -58,18 +59,30 @@ public class ClienteController implements ICrud <cliente>, IClienteController{
 		}
 		return bExito;
 	}
-	
-	
-	@Override
-	public boolean update (cliente Object) {
-		boolean bExito=false;
-		int iPosicion = search(Object);
-		if(iPosicion != -1) {
-			Array[iPosicion]=Object;
-			bExito=true;
-		}
-	return bExito;
-	}
 
+	@Override
+	public boolean update(cliente Object) {
+		boolean bExito = false;
+		int iPosicion = search(Object);
+		if (iPosicion != -1) {
+			Array[iPosicion] = Object;
+			bExito = true;
+		}
+		return bExito;
+	}
+	@Override
+	public String mostrarClientes() {
+		int cont = 0;
+		String sMensaje = "";
+		if (getContador() == 0) {
+			sMensaje = "No hay Clientes";
+
+		} else {
+			for (cont = 0; cont < getContador(); cont++) {
+				sMensaje += Array[cont] + "\n";
+			}
+		}
+		return sMensaje;
+	}
 
 }

@@ -1,20 +1,21 @@
 package controller;
 
 import modelo.articulo;
+import modelo.cliente;
 
 public class ArticuloController implements ICrud <articulo>, IArticuloController {
-	private articulo[] arrayArticulo;
-	private int contadorArticulos;
+	private articulo[] Array;
+	private int Contador;
 
 	public ArticuloController() {
-		arrayArticulo = new articulo[MAXARTICULO];
-		contadorArticulos = 0;
+		Array = new articulo[MAXARTICULO];
+		Contador = 0;
 	}
 
 
 	@Override
 	public articulo[] getArray() {
-		return arrayArticulo;
+		return Array;
 	}
 
 	
@@ -23,7 +24,7 @@ public class ArticuloController implements ICrud <articulo>, IArticuloController
 
 	@Override
 	public int getContador() {
-		return contadorArticulos;
+		return Contador;
 	}
 
 
@@ -35,7 +36,7 @@ public class ArticuloController implements ICrud <articulo>, IArticuloController
 		int iPosicion = -1;
 		int iContador = 0;
 		while (iPosicion == -1 && iContador < MAXARTICULO) {
-			if (Object.equals(arrayArticulo[iContador])) {
+			if (Object.equals(Array[iContador])) {
 				iPosicion = iContador;
 			}
 			iContador++;
@@ -47,9 +48,9 @@ public class ArticuloController implements ICrud <articulo>, IArticuloController
 	@Override
 	public boolean add(articulo Object) {
 		boolean bExito = false;
-		if (contadorArticulos < MAXARTICULO && search(Object) == -1) {
-			arrayArticulo[contadorArticulos] = Object;
-			contadorArticulos++;
+		if (Contador < MAXARTICULO && search(Object) == -1) {
+			Array[Contador] = Object;
+			Contador++;
 			bExito = true;
 		}
 		return bExito;
@@ -60,11 +61,11 @@ public class ArticuloController implements ICrud <articulo>, IArticuloController
 		boolean bExito = false;
 		int iPosicion = search(Object);
 		if (iPosicion != -1) {
-			for (int i = iPosicion + 1; i < contadorArticulos; i++) {
-				arrayArticulo[i - 1] = arrayArticulo[i];
+			for (int i = iPosicion + 1; i < Contador; i++) {
+				Array[i - 1] = Array[i];
 			}
-			arrayArticulo[contadorArticulos] = null;
-			contadorArticulos--;
+			Array[Contador] = null;
+			Contador--;
 			bExito = true;
 		}
 		return bExito;
@@ -76,9 +77,24 @@ public class ArticuloController implements ICrud <articulo>, IArticuloController
 		boolean bExito=false;
 		int iPosicion = search(Object);
 		if(iPosicion != -1) {
-			arrayArticulo[iPosicion]=Object;
+			Array[iPosicion]=Object;
 			bExito=true;
 		}
 	return bExito;
+	}
+	
+	@Override
+	public String mostrarArticulos() {
+		int cont = 0;
+		String sMensaje = "";
+		if (getContador() == 0) {
+			sMensaje = "No hay articulos";
+
+		} else {
+			for (cont = 0; cont < getContador(); cont++) {
+				sMensaje += Array[cont] + "\n";
+			}
+		}
+		return sMensaje;
 	}
 }
