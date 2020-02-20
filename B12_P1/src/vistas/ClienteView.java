@@ -14,7 +14,7 @@ public class ClienteView {
 	}
 
 	private static void CreareIntroducirClientes(ClienteController clcc) {
-		int NumeroCrearClientes = LibFrontend.validaNumero("¿Cuantos clientes quieres crear?", 1, 100);
+		int NumeroCrearClientes = LibFrontend.validaNumero("¿Cuantos clientes quieres crear?", 1, clcc.MAXCLIENTE);
 		int iContador = 0;
 		while (iContador < NumeroCrearClientes) {
 			clcc.add(CrearCliente());

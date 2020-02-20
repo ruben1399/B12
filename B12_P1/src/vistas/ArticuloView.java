@@ -16,7 +16,7 @@ public class ArticuloView {
 	}
 
 	private static void CreareIntroducirArticulos(ArticuloController atcc) {
-		int NumeroCrearArticulos = LibFrontend.validaNumero("¿Cuantos Articulos quieres crear?", 1, 50);
+		int NumeroCrearArticulos = LibFrontend.validaNumero("¿Cuantos Articulos quieres crear?", 1, atcc.MAXARTICULO);
 		int iContador = 0;
 		while (iContador < NumeroCrearArticulos) {
 			atcc.add(CrearArticulo());
