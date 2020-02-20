@@ -2,6 +2,7 @@ package vistas;
 
 import modelo.articulo;
 import controller.ArticuloController;
+import controller.ICrud;
 
 public class TIENDAFULLDEMANGO {
 
@@ -9,7 +10,7 @@ public class TIENDAFULLDEMANGO {
 		/*articulo artc = new articulo(1, "Satisfayer", 50);
 		artc.validarArticulo();
 		System.out.println(artc);*/
-		ArticuloController atcc = new ArticuloController();
+		ICrud atcc = new ArticuloController();
 		articulo atc = new articulo (1, "Satisfayer", 50);
 		
 	}
