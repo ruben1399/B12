@@ -3,12 +3,13 @@ package vistas;
 import controller.ArticuloController;
 import medac.validaciones.LibFrontend;
 import modelo.articulo;
+
 public class ArticuloView {
 
 	public static void main(String[] args) {
 
-		ArticuloController atcc= new ArticuloController();
-		
+		ArticuloController atcc = new ArticuloController();
+
 		CreareIntroducirArticulos(atcc);
 
 		System.out.println(atcc.mostrarArticulos());
@@ -22,6 +23,7 @@ public class ArticuloView {
 			iContador++;
 		}
 	}
+
 	private static articulo CrearArticulo() {
 		int IdArticulo = LibFrontend.validaNumero("Dime una ID", 1, 50);
 		String sNombre = LibFrontend.leer("Dime el nombre de Articulo");
@@ -29,8 +31,5 @@ public class ArticuloView {
 		articulo atc = new articulo(IdArticulo, sNombre, iPrecio);
 		return atc;
 	}
-	
-	
 
-	}
-
+}
