@@ -12,15 +12,21 @@ public class ArticuloView {
 
 		CreareIntroducirArticulos(atcc);
 
-		System.out.println(atcc.mostrarArticulos());
+		System.out.println(atcc.searchArticulo());
+
+		// añadir al carrito
+		
 	}
 
-	private static void CreareIntroducirArticulos(ArticuloController atcc) {
+	
+
+	public static void CreareIntroducirArticulos(ArticuloController atcc) {
 		int NumeroCrearArticulos = LibFrontend.validaNumero("¿Cuantos Articulos quieres crear?", 1, atcc.MAXARTICULO);
 		int iContador = 0;
 		while (iContador < NumeroCrearArticulos) {
 			atcc.add(CrearArticulo());
 			iContador++;
+			atcc.Contador++;
 		}
 	}
 
@@ -31,5 +37,7 @@ public class ArticuloView {
 		articulo atc = new articulo(IdArticulo, sNombre, iPrecio);
 		return atc;
 	}
+	
+	
 
 }

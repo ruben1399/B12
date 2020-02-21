@@ -1,5 +1,7 @@
 package controller;
 
+import medac.validaciones.LibFrontend;
+import modelo.articulo;
 import modelo.cliente;
 
 public class ClienteController implements ICrud<cliente>, IClienteController {
@@ -20,7 +22,18 @@ public class ClienteController implements ICrud<cliente>, IClienteController {
 	public int getContador() {
 		return Contador;
 	}
+	public cliente searchCliente() {
+		cliente obj = null;
+		int iContador = 0;
+		String sNombre = LibFrontend.leer("Dime un articulo que quieras buscar");
+		while (iContador < this.Contador) {
+			if (sNombre.equals(Array[iContador].getsNombre())) {
+				obj = Array[iContador];
 
+			}
+			iContador++;
+		}
+		return obj;}
 	@Override
 	public int search(cliente Object) {
 		int iPosicion = -1;

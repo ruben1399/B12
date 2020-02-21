@@ -10,7 +10,7 @@ public class ClienteView {
 		ClienteController clcc = new ClienteController();
 		CreareIntroducirClientes(clcc);
 
-		System.out.println(clcc.mostrarClientes());
+		System.out.println(clcc.searchCliente());
 	}
 
 	private static void CreareIntroducirClientes(ClienteController clcc) {
