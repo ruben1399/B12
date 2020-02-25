@@ -55,9 +55,11 @@ public class cliente implements ICliente {
 	@Override
 	public String toString() {
 		String sResultado = "";
+		sResultado += "-------------------------------------- \n";
 		sResultado += "Id Cliente: " + getIdCliente() + "\n";
 		sResultado += "Cliente: " + getsNombre() + "\n";
 		sResultado += "Precio: " + getiSaldo() + "\n";
+		sResultado += "-------------------------------------- \n";
 		return sResultado;
 	}
 	@Override

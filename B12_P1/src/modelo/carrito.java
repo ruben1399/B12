@@ -67,7 +67,11 @@ public class carrito implements ICarrito {
 
 	@Override
 	public String toString() {
-		return "Hay " + getiContArtCarrito() + " Articulos que son: " + Arrays.toString(arrayCarrito);
+		String sMensaje="";
+		sMensaje+= "----------------------------------------------------------------------------------------";
+		sMensaje+= "Hay " + getiContArtCarrito() + " Articulos que son: " + Arrays.toString(arrayCarrito);
+		sMensaje+= "----------------------------------------------------------------------------------------";
+		return sMensaje;
 	}
 
 }

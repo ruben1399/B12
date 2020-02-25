@@ -14,7 +14,6 @@ public class ArticuloView {
 
 		System.out.println(atcc.searchArticulo());
 
-		// añadir al carrito
 		
 	}
 
