@@ -24,35 +24,6 @@ public class TIENDA {
 		return ContadorArticulosCarrito;
 	}
 
-	public articulo[] AñadirAlCarrito() {
 
-		int iContador = 0;
-		int ContadorCarrito = 0;
-		int iCantidadDeArticulos = LibFrontend.validaNumero("¿Que cantidad de articulos quieres añadir al carrito?", 0,100);
-		while (iContador < iCantidadDeArticulos) {
-			String articuloAñadir = LibFrontend.leer("¿Que articulo quieres añadir al carrito?");
-			if (articuloAñadir.equals(atcc.Array[iContador].getsNombre())) {
-				Carrito[ContadorCarrito] = atcc.Array[iContador];
-				ContadorCarrito++;
-			}
-			iContador++;
-
-		}
-		return Carrito;
-	}
-
-	public String mostrarCarrito() {
-		int cont = 0;
-		String sMensaje = "";
-		if (getContadorArticulosCarrito() == 0) {
-			sMensaje = "No hay articulos en el carrito";
-
-		} else {
-			for (cont = 0; cont < getContadorArticulosCarrito(); cont++) {
-				sMensaje += Carrito[cont] + "\n";
-			}
-		}
-		return sMensaje;
-	}
 
 }
