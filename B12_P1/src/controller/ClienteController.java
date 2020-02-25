@@ -22,18 +22,21 @@ public class ClienteController implements ICrud<cliente>, IClienteController {
 	public int getContador() {
 		return Contador;
 	}
-	public cliente searchCliente() {
-		cliente obj = null;
-		int iContador = 0;
-		String sNombre = LibFrontend.leer("Dime un articulo que quieras buscar");
+
+	public int searchCliente(String sNombre) {
+		int iPosicion=0;
+		int iContador = -1;
 		while (iContador < this.Contador) {
+			iContador++;
 			if (sNombre.equals(Array[iContador].getsNombre())) {
-				obj = Array[iContador];
+				iPosicion=iContador;
 
 			}
-			iContador++;
+
 		}
-		return obj;}
+		return iPosicion;
+	}
+
 	@Override
 	public int search(cliente Object) {
 		int iPosicion = -1;
@@ -83,6 +86,7 @@ public class ClienteController implements ICrud<cliente>, IClienteController {
 		}
 		return bExito;
 	}
+
 	@Override
 	public String mostrarClientes() {
 		int cont = 0;
