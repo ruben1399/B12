@@ -14,4 +14,5 @@ public interface ICrud <T> {
 
 	public boolean update(T Object);
 
+
 }

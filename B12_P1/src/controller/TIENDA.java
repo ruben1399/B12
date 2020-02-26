@@ -1,29 +1,30 @@
 package controller;
 
-import modelo.articulo;
-import controller.ArticuloController;
-import medac.validaciones.LibFrontend;
+
 
 public class TIENDA {
-	private articulo[] Carrito;
-	private int ContadorArticulosCarrito;
-	private final int MAXARTICCARRITO = 100;
-	ArticuloController atcc = new ArticuloController();
-
+	ArticuloController atcc;
+	ClienteController clcc;
+	CarritoController carcc;
 	public TIENDA() {
-		super();
-		Carrito = new articulo[MAXARTICCARRITO];
-		ContadorArticulosCarrito = 0;
+		atcc = new ArticuloController();
+		clcc = new ClienteController();
+		carcc = new CarritoController();
+	}
+	public ArticuloController getAtcc() {
+		return atcc;
 	}
 
-	public articulo[] getCarrito() {
-		return Carrito;
+	public ClienteController getClcc() {
+		return clcc;
 	}
 
-	public int getContadorArticulosCarrito() {
-		return ContadorArticulosCarrito;
+	public CarritoController getCarcc() {
+		return carcc;
 	}
-
+	
+	
+	
 
 
 }

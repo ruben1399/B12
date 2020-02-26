@@ -5,12 +5,16 @@ import modelo.articulo;
 import modelo.cliente;
 
 public class ArticuloController implements ICrud<articulo>, IArticuloController {
-	public articulo[] Array;
-	public int Contador;
+	private articulo[] Array;
+	private int Contador;
 
 	public ArticuloController() {
 		Array = new articulo[MAXARTICULO];
 		Contador = 0;
+	}
+	@Override
+	public void setContador(int contador) {
+		Contador = contador;
 	}
 
 	@Override
@@ -23,20 +27,7 @@ public class ArticuloController implements ICrud<articulo>, IArticuloController 
 		return Contador;
 	}
 
-	//// CRUD
-	public articulo searchArticulo() {
-		articulo obj = null;
-		int iContador = 0;
-		String sNombre = LibFrontend.leer("Dime un articulo que quieras buscar");
-		while (iContador < this.Contador) {
-			if (sNombre.equals(Array[iContador].getsNombre())) {
-				obj = Array[iContador];
-
-			}
-			iContador++;
-		}
-		return obj;
-	}
+	
 
 	@Override
 	public int search(articulo Object) {
@@ -89,7 +80,7 @@ public class ArticuloController implements ICrud<articulo>, IArticuloController 
 	}
 
 	@Override
-	public String mostrarArticulos() {
+	public  String mostrarArticulos() {
 		int cont = 0;
 		String sMensaje = "";
 		if (getContador() == 0) {

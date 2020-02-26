@@ -14,6 +14,11 @@ public class ClienteController implements ICrud<cliente>, IClienteController {
 	}
 
 	@Override
+	public void setContador(int contador) {
+		Contador = contador;
+	}
+
+	@Override
 	public cliente[] getArray() {
 		return Array;
 	}
@@ -23,19 +28,7 @@ public class ClienteController implements ICrud<cliente>, IClienteController {
 		return Contador;
 	}
 
-	public int searchCliente(String sNombre) {
-		int iPosicion=0;
-		int iContador = -1;
-		while (iContador < this.Contador) {
-			iContador++;
-			if (sNombre.equals(Array[iContador].getsNombre())) {
-				iPosicion=iContador;
-
-			}
-
-		}
-		return iPosicion;
-	}
+	
 
 	@Override
 	public int search(cliente Object) {

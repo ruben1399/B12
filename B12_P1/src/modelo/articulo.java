@@ -79,7 +79,7 @@ public class articulo implements IArticulo {
 	@Override
 	public String toString() {
 		String sResultado = "";
-		sResultado += "--------------------------------------";
+		sResultado += "-------------------------------------- \n";
 		sResultado += "Id: " + getId() + "\n";
 		sResultado += "Articulo: " + getsNombre() + "\n";
 		sResultado += "Precio: " + getdPrecio() + "\n";

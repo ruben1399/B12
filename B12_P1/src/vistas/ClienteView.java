@@ -1,5 +1,6 @@
 package vistas;
 
+
 import controller.ClienteController;
 import medac.validaciones.LibFrontend;
 import modelo.cliente;
@@ -9,12 +10,13 @@ public class ClienteView {
 	public static void main(String[] args) {
 		ClienteController clcc = new ClienteController();
 		CreareIntroducirClientes(clcc);
-
-		System.out.println(updateCliente(clcc));
+		System.out.println(clcc.mostrarClientes());
+		removeCliente(clcc);
+		System.out.println(clcc.mostrarClientes());
 	}
 
 	public static void CreareIntroducirClientes(ClienteController clcc) {
-		int NumeroCrearClientes = LibFrontend.validaNumero("¿Cuantos clientes quieres crear?", 1, clcc.MAXCLIENTE);
+		int NumeroCrearClientes = LibFrontend.validaNumero("¿Cuantos clientes quieres crear?", 1, ClienteController.MAXCLIENTE);
 		int iContador = 0;
 		while (iContador < NumeroCrearClientes) {
 			clcc.add(CrearCliente());
@@ -29,21 +31,35 @@ public class ClienteView {
 		cliente ocl = new cliente(IdCliente, sNombre, iSaldo);
 		return ocl;
 	}
-	
-	
-	
-	public static cliente[] updateCliente(ClienteController clcc) {
 
-		
-		String sNombre = LibFrontend.leer("Dime un cliente que quieras actualizar");
+	public static void updateCliente(ClienteController clcc) {
 		String sNombreNew = LibFrontend.leer("Dime nuevo cliente o la modificacion que quieres realizar");
-		/*int iContador=0;*/
-		int iPos= clcc.searchCliente(sNombre);
-		
-		
+		int iPos = searchCliente(clcc);
 		clcc.getArray()[iPos].setsNombre(sNombreNew);
-		return clcc.getArray();
-		 
+
+	}
+	public static int searchCliente(ClienteController clcc) {
+		int iPosicion=0;
+		int iContador = 0;
+		String sNombre = LibFrontend.leer("Dime un nombre de cliente ");
+		while (iContador < clcc.getContador()) {
+			if (sNombre.equals(clcc.getArray()[iContador].getsNombre())) {
+				iPosicion=iContador;
+
+			}
+			iContador++;
+		}
+		return iPosicion;
+	}
 	
+	public static void removeCliente(ClienteController clcc) {
+		int iPosicion = searchCliente(clcc);
+		if (iPosicion != -1) {
+			for (int i = iPosicion + 1; i < clcc.getContador(); i++) {
+				clcc.getArray()[i - 1] = clcc.getArray()[i];
+			}
+			clcc.getArray()[clcc.getContador()] = null;
+			clcc.setContador(clcc.getContador()-1);
+		}
 	}
 }

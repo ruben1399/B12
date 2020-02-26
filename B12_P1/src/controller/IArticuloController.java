@@ -7,5 +7,6 @@ public interface IArticuloController {
 	public final int MAXCARRITO=50;
 
 	public String mostrarArticulos();
+	public void setContador(int contador);
 	
 }
