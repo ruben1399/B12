@@ -1,7 +1,7 @@
 package controller;
 
-import medac.validaciones.LibFrontend;
-import modelo.articulo;
+
+
 import modelo.cliente;
 
 public class ClienteController implements ICrud<cliente>, IClienteController {
