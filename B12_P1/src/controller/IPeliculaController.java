@@ -3,6 +3,7 @@ package controller;
 import modelo.pelicula;
 
 public interface IPeliculaController {
+	public final int MAXPELICULA = 100;
 
 	public pelicula[] getArray();
 

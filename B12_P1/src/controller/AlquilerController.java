@@ -1,44 +1,37 @@
 package controller;
-import modelo.pelicula;
 
+import modelo.alquiler;
 
-public class PeliculaController implements ICrud<pelicula>, IPeliculaController{
-	private pelicula[] Array;
+public class AlquilerController {
+	public final int MAXALQUILER=100;
+	private alquiler[] Array;
 	private int Contador;
-
-	public PeliculaController() {
+	public AlquilerController() {
+		Array = new alquiler[MAXALQUILER];
 		Contador = 0;
-		Array = new pelicula[MAXPELICULA];
 	}
 
-	@Override
-	public pelicula[] getArray() {
+	public void setContador(int contador ) {
+		Contador = contador;
+	}
+
+
+	public alquiler[] getArray() {
 		return Array;
 	}
 
-	@Override
-	public void setArray(pelicula[] pelicula) {
-		this.Array = pelicula;
-	}
 
-	@Override
 	public int getContador() {
 		return Contador;
 	}
 
-	@Override
-	public void setContador(int Contador) {
-		this.Contador = Contador;
-	}
-	
-	
 	
 
-	@Override
-	public int search(pelicula Object) {
+
+	public int search(alquiler Object) {
 		int iPosicion = -1;
 		int iContador = 0;
-		while (iPosicion == -1 && iContador < MAXPELICULA) {
+		while (iPosicion == -1 && iContador < MAXALQUILER) {
 			if (Object.equals(Array[iContador])) {
 				iPosicion = iContador;
 			}
@@ -47,10 +40,10 @@ public class PeliculaController implements ICrud<pelicula>, IPeliculaController{
 		return iPosicion;
 	}
 
-	@Override
-	public boolean add(pelicula Object) {
+	
+	public boolean add(alquiler Object) {
 		boolean bExito = false;
-		if (Contador < MAXPELICULA && search(Object) == -1) {
+		if (Contador < MAXALQUILER && search(Object) == -1) {
 			Array[Contador] = Object;
 			Contador++;
 			bExito = true;
@@ -58,8 +51,8 @@ public class PeliculaController implements ICrud<pelicula>, IPeliculaController{
 		return bExito;
 	}
 
-	@Override
-	public boolean remove(pelicula Object) {
+	
+	public boolean remove(alquiler Object) {
 		boolean bExito = false;
 		int iPosicion = search(Object);
 		if (iPosicion != -1) {
@@ -74,8 +67,7 @@ public class PeliculaController implements ICrud<pelicula>, IPeliculaController{
 	}
 
 
-	@Override
-	public boolean update(pelicula Object) {
+	public boolean update(alquiler Object) {
 		boolean bExito = false;
 		int iPosicion = search(Object);
 		if (iPosicion != -1) {
@@ -85,13 +77,12 @@ public class PeliculaController implements ICrud<pelicula>, IPeliculaController{
 		return bExito;
 	}
 
-
-	@Override
-	public String mostrarpeliculas() {
+	
+	public  String mostraralquileres() {
 		int cont = 0;
 		String sMensaje = "";
 		if (getContador() == 0) {
-			sMensaje = "No hay peliculas";
+			sMensaje = "No hay alquiler";
 
 		} else {
 			for (cont = 0; cont < getContador(); cont++) {
@@ -100,5 +91,5 @@ public class PeliculaController implements ICrud<pelicula>, IPeliculaController{
 		}
 		return sMensaje;
 	}
-
+	
 }

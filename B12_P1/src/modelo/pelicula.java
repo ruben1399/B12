@@ -86,11 +86,11 @@ public class pelicula implements IPelicula {
 	@Override
 	public String toString() {
 		String sMensaje="";
-		sMensaje += "Id de pelicula: " + Id;
-		sMensaje += "Nombre de la pelicula: " + sNombre;
-		sMensaje += "Sipnopsis" + sSinopsis;
-		sMensaje += "Tipo de pelicula" + sTipo;
-		sMensaje += "Precio: " + iPrecio;
+		sMensaje += "Id de pelicula: " + getId();
+		sMensaje += "Nombre de la pelicula: " + getsNombre();
+		sMensaje += "Sipnopsis" + getsSinopsis();
+		sMensaje += "Tipo de pelicula" + getsTipo();
+		sMensaje += "Precio: " + getiPrecio();
 		return sMensaje;
 	}
 
