@@ -1,66 +1,192 @@
 package vistas;
 
-import controller.PeliculaController;
+import controller.Pelicula_Controller;
+import controller.TIENDA;
 import medac.validaciones.LibFrontend;
+import modelo.cliente;
 import modelo.pelicula;
 
 public class PeliculaView {
 
-	public static void main(String[] args) {
+	public static boolean add(TIENDA t) {
+		int Id=0;
+	    String sNombre;
+		String sSinopsis;
+		String sTipo;
+		int iPrecio=0;
+		boolean bExito=false;
 
-		PeliculaController pcc = new PeliculaController();
-
-	}
-
-	public static void CreareIntroducirArticulos(PeliculaController pcc) {
-		int NumeroCrearArticulos = LibFrontend.validaNumero("¿Cuantos Articulos quieres crear?", 1, pcc.MAXPELICULA);
-		int iContador = 0;
-		while (iContador < NumeroCrearArticulos) {
-			pcc.add(CrearPelicula());
-			iContador++;
-		}
-	}
-
-	private static pelicula CrearPelicula() {
-		int id = LibFrontend.validaNumero("Dime una ID", 1, 50);
-		String sNombre = LibFrontend.leer("Dime el nombre de la pelicula");
-		String sSinopsis = LibFrontend.leer("Dime un breve resumen de esta pelicula");
-		String sTipo = LibFrontend.leer("¿De que tipo es esta pelicula?");
-		int iPrecio = LibFrontend.validaNumero("Dime el precio", 0, 50000);
-		pelicula pc = new pelicula(id, sNombre, sSinopsis, sTipo, iPrecio);
-		return pc;
-	}
-
-	public static void updatePelicula(PeliculaController pcc) {
-		String sNombreNew = LibFrontend.leer("Dime nuevo nombre de pelicula o la modificacion que quieres realizar");
-		int iPos = searchPelicula(pcc);
-		pcc.getArray()[iPos].setsNombre(sNombreNew);
-
-	}
-
-	public static int searchPelicula(PeliculaController pcc) {
-		int iPosicion = 0;
-		int iContador = 0;
-		String sNombre = LibFrontend.leer("Dime el nombre de una pelicula ");
-		while (iContador < pcc.getContador()) {
-			if (sNombre.equals(pcc.getArray()[iContador].getsNombre())) {
-				iPosicion = iContador;
-
+		bExito = false;
+		while (!bExito) {
+			try {
+				Id = (int) LibFrontend.valida("Introduce el id", 1, 50, 4);
+				bExito = true;
+			} catch (NumberFormatException e) {
+				System.out.println("ERROR");
+			} catch (Exception ex) {
+				System.out.println("ERROR");
 			}
-			iContador++;
 		}
-		return iPosicion;
+		
+		sNombre=LibFrontend.leer("Introduce un nombre: ");
+		sSinopsis=LibFrontend.leer("Indica la sinopsis: ");
+		sTipo=LibFrontend.leer("Introduce un tipo: ");
+		
+		bExito = false;
+		while (!bExito) {
+			try {
+				iPrecio = (int) LibFrontend.valida("Introduce el id", 1, 50, 4);
+				bExito = true;
+			} catch (NumberFormatException e) {
+				System.out.println("ERROR");
+			} catch (Exception ex) {
+				System.out.println("ERROR");
+			}
+		}
+
+	   sNombre= LibFrontend.leer("Introduce un nombre: ");
+	
+		pelicula oPelicula = new pelicula(Id, sNombre, sSinopsis, sTipo, iPrecio);
+		return t.getPcc().add(oPelicula);
 	}
 
-	public static void removeArticulo(PeliculaController pcc) {
-		int iPosicion = searchPelicula(pcc);
-		if (iPosicion != -1) {
-			for (int i = iPosicion + 1; i < pcc.getContador(); i++) {
-				pcc.getArray()[i - 1] = pcc.getArray()[i];
+	public static pelicula search(TIENDA t) {
+		int idPelicula = 0;
+		pelicula osearch = null;
+		boolean bExito=false;
+		
+		bExito = false;
+		while (!bExito) {
+			try {
+				idPelicula = (int) LibFrontend.valida("Introduce el id", 1, 50, 4);
+				bExito = true;
+			} catch (NumberFormatException e) {
+				System.out.println("ERROR");
+			} catch (Exception ex) {
+				System.out.println("ERROR");
 			}
-			pcc.getArray()[pcc.getContador()] = null;
-			pcc.setContador(pcc.getContador() - 1);
+		}
+
+		int iposicion = t.getPcc().search(new pelicula(idPelicula));
+		if (iposicion != -1) {
+			osearch = t.getPcc().getaVector()[iposicion];
+		}
+		return osearch;
+	}
+	
+	public static boolean remove(TIENDA t) {
+			boolean bExito = false;
+			pelicula remove = search(t);
+			if (remove != null) {
+				t.getPcc().remove(remove);
+				bExito=true;
+			}
+			return bExito;
+		} 
+
+	public static boolean update(TIENDA t) {
+		pelicula oupdate = search(t);
+		int idPelicula=0;
+		
+		boolean bExito;
+		bExito = false;
+		
+		bExito = false;
+		while (!bExito) {
+			try {
+				idPelicula = (int) LibFrontend.valida("Introduce el id", 1, 50, 4);
+				bExito = true;
+			} catch (NumberFormatException e) {
+				System.out.println("ERROR");
+			} catch (Exception ex) {
+				System.out.println("ERROR");
+			}
+		}
+		return t.getPcc().modificar(oupdate);
+	}
+	
+	
+	public static void menuPelicula(TIENDA t) {
+		boolean bExito = false;
+		int opcion = 0;
+		System.out.println("          PELICULA          ");
+		System.out.println("1. Añadir Pelicula");
+		System.out.println("2. Eliminar Pelicula");
+		System.out.println("3. Modificar Pelicula");
+		System.out.println("4. Buscar Pelicula");
+		System.out.println("5. Salir al menu VistaGeneral");
+
+		bExito = false;
+		while (!bExito) {
+			try {
+				opcion = (int) LibFrontend.valida("Elige una opcion", 1, 6, 1);
+				bExito = true;
+			} catch (NumberFormatException e) {
+				System.out.println("Error");
+			} catch (Exception ex) {
+				System.out.println("Error");
+			}
+		}
+
+		switch (opcion) {
+		case 1:
+			if (add(t)) {
+				System.out.println("La pelicula se ha añadido con exito.");
+			} else {
+				System.out.println("La pelicula no se ha podido añadir.");
+			}
+
+			pelicula[] pelicula = t.getPcc().getaVector();
+			for (int i = 0; i < t.getPcc().getbContadorArray(); i++) {
+				System.out.println("Pelicula:" + pelicula[i]);
+			}
+			System.out.println("-------------------------------------------------------------------------");
+			menuPelicula(t);
+			break;
+
+		case 2:
+			if (remove(t)) {
+				System.out.println("La pelicula se ha eliminado con exito.");
+			} else {
+				System.out.println("La pelicula no se ha podido añadir.");
+			}
+
+			pelicula[] pelicula1 = t.getPcc().getaVector();
+			for (int i = 0; i < t.getPcc().getbContadorArray(); i++) {
+				System.out.println("Pelicula:" + pelicula1[i]);
+			}
+			System.out.println("-------------------------------------------------------------------------");
+			menuPelicula(t);
+			break;
+
+		case 3:
+			if (update(t)) {
+				System.out.println("La pelicula se ha modificado con exito.");
+			} else {
+				System.out.println("La pelicula no se ha podido modificar.");
+			}
+
+			pelicula[] pelicula2 = t.getPcc().getaVector();
+			for (int i = 0; i < t.getPcc().getbContadorArray(); i++) {
+				System.out.println("Pelicula:" + pelicula2[i]);
+			}
+			System.out.println("-------------------------------------------------------------------------");
+			menuPelicula(t);
+			break;
+
+		case 4:
+			if (search(t) != null) {
+				System.out.println("La pelicula se ha mostrado con exito.");
+			} else {
+				System.out.println("La pelicula no se ha podido añadir.");
+			}
+			System.out.println("-------------------------------------------------------------------------");
+			menuPelicula(t);
+			break;
+		case 5:
+			VistaGeneral.menuPrincipal();;
+			VistaGeneral.opcionMenuPrincipal(opcion = (int) LibFrontend.valida("Elige una opcion", 1, 3, 1), t);
+			break;
 		}
 	}
 }
-

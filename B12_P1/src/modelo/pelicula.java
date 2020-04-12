@@ -14,6 +14,88 @@ public class pelicula implements IPelicula {
 		setsSinopsis(sSinopsis);
 		setsTipo(sTipo);
 	}
+	public pelicula(int id) {
+		setId(id);
+	}
+
+
+	@Override
+	public int getiPrecio() {
+		return iPrecio;
+	}
+
+	@Override
+	public boolean setiPrecio(int iPrecio) {
+		boolean bExito=false;
+		if(iPrecio > 0 ) {
+			this.iPrecio = iPrecio;
+			bExito=true;
+		}
+		return bExito;
+	}
+		
+	@Override
+
+	public int getId() {
+		return Id;
+	}
+
+	private boolean setId(int id) {
+		boolean bExito=false;
+		if(Id > 0 ) {
+			this.Id = id;
+			bExito=true;
+		}
+		return bExito;
+		
+	}
+
+	@Override
+	public String getsTipo() {
+		return sTipo;
+	}
+
+	@Override
+	public boolean setsTipo(String sTipo) {
+		boolean bExito=false;
+		if(!sTipo.equals("") && sTipo.length()<50) {
+			this.sTipo = sTipo;
+			bExito=true;
+		}
+		return bExito;
+		
+	}
+
+	@Override
+	public String getsNombre() {
+		return sNombre;
+	}
+
+	@Override
+	public boolean setsNombre(String sNombre) {
+		boolean bExito=false;
+		if(!sNombre.equals("") && sNombre.length()<50) {
+			this.sNombre = sNombre;
+			bExito=true;
+		}
+		return bExito;
+	}
+
+	@Override
+	public String getsSinopsis() {
+		return sSinopsis;
+	}
+
+	@Override
+	public boolean setsSinopsis(String sSinopsis) {
+		boolean bExito=false;
+		if(!sSinopsis.equals("") && sSinopsis.length()<250) {
+			this.sSinopsis = sSinopsis;
+			bExito=true;
+		}
+		return bExito;
+		
+	}
 
 	@Override
 	public int hashCode() {
@@ -33,56 +115,7 @@ public class pelicula implements IPelicula {
 		return b;
 	}
 
-	@Override
-	public int getiPrecio() {
-		return iPrecio;
-	}
-
-	@Override
-	public void setiPrecio(int iPrecio) {
-		this.iPrecio = iPrecio;
-	}
-
-	@Override
-
-	public int getId() {
-		return Id;
-	}
-
-	private void setId(int id) {
-		Id = id;
-	}
-
-	@Override
-	public String getsTipo() {
-		return sTipo;
-	}
-
-	@Override
-	public void setsTipo(String sTipo) {
-		this.sTipo = sTipo;
-	}
-
-	@Override
-	public String getsNombre() {
-		return sNombre;
-	}
-
-	@Override
-	public void setsNombre(String sNombre) {
-		this.sNombre = sNombre;
-	}
-
-	@Override
-	public String getsSinopsis() {
-		return sSinopsis;
-	}
-
-	@Override
-	public void setsSinopsis(String sSinopsis) {
-		this.sSinopsis = sSinopsis;
-	}
-
+	
 	@Override
 	public String toString() {
 		String sMensaje="";

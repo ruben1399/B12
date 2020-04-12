@@ -1,40 +1,62 @@
 package controller;
 
 import medac.validaciones.LibFrontend;
-import modelo.articulo;
-import modelo.cliente;
 
-public class ArticuloController implements ICrud<articulo>, IArticuloController {
-	private articulo[] Array;
-	private int Contador;
+import modelo.articulo;
+
+public class ArticuloController implements ICrud<articulo> {
+	
+	private articulo aArticulo[];
+	private byte bContadorArticulo;
+	private final int MAXARTICULO = 100;
 
 	public ArticuloController() {
-		Array = new articulo[MAXARTICULO];
-		Contador = 0;
-	}
-	@Override
-	public void setContador(int contador) {
-		Contador = contador;
+		aArticulo = new articulo[MAXARTICULO];
+		bContadorArticulo = 0;
 	}
 
 	@Override
-	public articulo[] getArray() {
-		return Array;
+	public articulo[] getaVector() {
+		return aArticulo;
 	}
 
 	@Override
-	public int getContador() {
-		return Contador;
+	public byte getbContadorArray() {
+		return bContadorArticulo;
 	}
 
-	
+	@Override
+	public boolean add(articulo oObject) {
+		boolean bExito = false;
+		if (bContadorArticulo < MAXARTICULO && search(oObject) == -1) {
+			aArticulo[bContadorArticulo] = oObject;
+			bContadorArticulo++;
+			bExito = true;
+		}
+		return bExito;
+	}
 
 	@Override
-	public int search(articulo Object) {
+	public boolean remove(articulo oObject) {
+		boolean bExito = false;
+		int iPosicion = search(oObject);
+		if (iPosicion != -1) {
+			for (int i = iPosicion + 1; i < bContadorArticulo; i++) {
+				aArticulo[i - 1] = aArticulo[i];
+			}
+			aArticulo[bContadorArticulo] = null;
+			bContadorArticulo--;
+			bExito = true;
+		}
+		return bExito;
+	}
+
+	@Override
+	public int search(articulo oObject) {
 		int iPosicion = -1;
 		int iContador = 0;
-		while (iPosicion == -1 && iContador < MAXARTICULO) {
-			if (Object.equals(Array[iContador])) {
+		while (iPosicion == -1 && iContador < bContadorArticulo) {
+			if (oObject.equals(aArticulo[iContador])) {
 				iPosicion = iContador;
 			}
 			iContador++;
@@ -43,54 +65,14 @@ public class ArticuloController implements ICrud<articulo>, IArticuloController 
 	}
 
 	@Override
-	public boolean add(articulo Object) {
+	public boolean modificar(articulo oObject) {
 		boolean bExito = false;
-		if (Contador < MAXARTICULO && search(Object) == -1) {
-			Array[Contador] = Object;
-			Contador++;
-			bExito = true;
-		}
-		return bExito;
-	}
+		int iPosicion = search(oObject);
 
-	@Override
-	public boolean remove(articulo Object) {
-		boolean bExito = false;
-		int iPosicion = search(Object);
 		if (iPosicion != -1) {
-			for (int i = iPosicion + 1; i < Contador; i++) {
-				Array[i - 1] = Array[i];
-			}
-			Array[Contador] = null;
-			Contador--;
+			aArticulo[iPosicion] = oObject;
 			bExito = true;
 		}
 		return bExito;
-	}
-
-	@Override
-	public boolean update(articulo Object) {
-		boolean bExito = false;
-		int iPosicion = search(Object);
-		if (iPosicion != -1) {
-			Array[iPosicion] = Object;
-			bExito = true;
-		}
-		return bExito;
-	}
-
-	@Override
-	public  String mostrarArticulos() {
-		int cont = 0;
-		String sMensaje = "";
-		if (getContador() == 0) {
-			sMensaje = "No hay articulos";
-
-		} else {
-			for (cont = 0; cont < getContador(); cont++) {
-				sMensaje += Array[cont] + "\n";
-			}
-		}
-		return sMensaje;
 	}
 }

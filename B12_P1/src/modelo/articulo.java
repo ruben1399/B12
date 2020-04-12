@@ -10,7 +10,10 @@ public class articulo implements IArticulo {
 		setsNombre(sNombre);
 		setdPrecio(dPrecio);
 	}
-
+	public articulo(int Id) {
+		setId(Id);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

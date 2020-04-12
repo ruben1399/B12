@@ -1,98 +1,81 @@
 package controller;
 
-
-
 import modelo.cliente;
 
-public class ClienteController implements ICrud<cliente>, IClienteController {
-	private cliente[] Array;
-	private int Contador;
 
-	public ClienteController() {
-		Contador = 0;
-		Array = new cliente[MAXCLIENTE];
-	}
-
-	@Override
-	public void setContador(int contador) {
-		Contador = contador;
-	}
-
-	@Override
-	public cliente[] getArray() {
-		return Array;
-	}
-
-	@Override
-	public int getContador() {
-		return Contador;
-	}
-
+public class ClienteController implements ICrud<cliente> {
 	
+	private cliente aCliente[];
+	private byte bContadorcliente;
+	private final int MAXCliente = 100;
+	
+	public ClienteController() {
+		aCliente = new cliente[MAXCliente];
+		bContadorcliente = 0;
+	}
+	
+	@Override
+	public cliente[] getaVector() {
+		return aCliente;
+	}
 
 	@Override
-	public int search(cliente Object) {
-		int iPosicion = -1;
-		int iContador = 0;
-		while (iPosicion == -1 && iContador < MAXCLIENTE) {
-			if (Object.equals(Array[iContador])) {
-				iPosicion = iContador;
+	public byte getbContadorArray() {
+		return bContadorcliente;
+	}
+	
+	@Override
+	public boolean add(cliente oObject) {
+		boolean bExito = false;
+		if(bContadorcliente < MAXCliente && search(oObject) == -1) {
+			aCliente[bContadorcliente] = oObject;
+			bContadorcliente++;
+			bExito = true;
+		}
+		return bExito;
+	}
+
+	@Override
+	public boolean remove(cliente oObject) {
+		boolean bExito = false;
+		int iPosicion = search(oObject);
+		if(iPosicion != -1) {
+			for(int i=iPosicion+1; i<bContadorcliente; i++) {
+				aCliente[i-1] = aCliente[i];	
 			}
-			iContador++;
+			aCliente[bContadorcliente] = null;
+			bContadorcliente--;
+			bExito = true;
+		}
+		return bExito;
+	}
+
+	@Override
+	public int search(cliente oObject) {
+		int iPosicion = -1;
+		int ibContadorcliente = 0;
+		while(iPosicion == -1 && ibContadorcliente < bContadorcliente) {
+			if(oObject.equals(aCliente[ibContadorcliente])) {
+				iPosicion = ibContadorcliente;
+			}
+			ibContadorcliente++;
 		}
 		return iPosicion;
 	}
 
 	@Override
-	public boolean add(cliente Object) {
-		boolean bExito = false;
-		if (Contador < MAXCLIENTE && search(Object) == -1) {
-			Array[Contador] = Object;
-			Contador++;
-			bExito = true;
-		}
-		return bExito;
-	}
+	public boolean modificar(cliente oObject) {
+        boolean bExito=false;
+        int iPosicion = search(oObject);
 
-	@Override
-	public boolean remove(cliente Object) {
-		boolean bExito = false;
-		int iPosicion = search(Object);
-		if (iPosicion != -1) {
-			for (int i = iPosicion + 1; i < Contador; i++) {
-				Array[i - 1] = Array[i];
-			}
-			Array[Contador] = null;
-			Contador--;
-			bExito = true;
-		}
-		return bExito;
-	}
+        if(iPosicion != -1) {
+        	aCliente[iPosicion]=oObject;
+            bExito=true;
+        }
+        return bExito;
+    }
 
-	@Override
-	public boolean update(cliente Object) {
-		boolean bExito = false;
-		int iPosicion = search(Object);
-		if (iPosicion != -1) {
-			Array[iPosicion] = Object;
-			bExito = true;
-		}
-		return bExito;
-	}
 
-	@Override
-	public String mostrarClientes() {
-		int cont = 0;
-		String sMensaje = "";
-		if (getContador() == 0) {
-			sMensaje = "No hay Clientes";
 
-		} else {
-			for (cont = 0; cont < getContador(); cont++) {
-				sMensaje += Array[cont] + "\n";
-			}
-		}
-		return sMensaje;
-	}
 
 }

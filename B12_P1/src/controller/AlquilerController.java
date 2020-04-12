@@ -2,37 +2,58 @@ package controller;
 
 import modelo.alquiler;
 
-public class AlquilerController {
-	public final int MAXALQUILER=100;
-	private alquiler[] Array;
-	private int Contador;
-	public AlquilerController() {
-		Array = new alquiler[MAXALQUILER];
-		Contador = 0;
-	}
-
-	public void setContador(int contador ) {
-		Contador = contador;
-	}
-
-
-	public alquiler[] getArray() {
-		return Array;
-	}
-
-
-	public int getContador() {
-		return Contador;
-	}
-
+public class AlquilerController implements ICrud<alquiler> {
+	private alquiler aAlquiler[];
+	private byte bContadorAlquiler;
+	private final int MAXAlquiler = 100;
 	
+	public AlquilerController() {
+		aAlquiler = new alquiler[MAXAlquiler];
+		bContadorAlquiler = 0;
+	}
 
+	@Override
+	public alquiler[] getaVector() {
+		return aAlquiler;
+	}
 
-	public int search(alquiler Object) {
+	@Override
+	public byte getbContadorArray() {
+		return bContadorAlquiler;
+	}
+
+	@Override
+	public boolean add(alquiler oObject) {
+		boolean bExito = false;
+		if(bContadorAlquiler < MAXAlquiler && search(oObject) == -1) {
+			aAlquiler[bContadorAlquiler] = oObject;
+			bContadorAlquiler++;
+			bExito = true;
+		}
+		return bExito;
+	}
+
+	@Override
+	public boolean remove(alquiler oObject) {
+		boolean bExito = false;
+		int iPosicion = search(oObject);
+		if(iPosicion != -1) {
+			for(int i=iPosicion+1; i<bContadorAlquiler; i++) {
+				aAlquiler[i-1] = aAlquiler[i];	
+			}
+			aAlquiler[bContadorAlquiler] = null;
+			bContadorAlquiler--;
+			bExito = true;
+		}
+		return bExito;
+	}
+
+	@Override
+	public int search(alquiler oObject) {
 		int iPosicion = -1;
 		int iContador = 0;
-		while (iPosicion == -1 && iContador < MAXALQUILER) {
-			if (Object.equals(Array[iContador])) {
+		while(iPosicion == -1 && iContador < bContadorAlquiler) {
+			if(oObject.equals(aAlquiler[iContador])) {
 				iPosicion = iContador;
 			}
 			iContador++;
@@ -40,56 +61,15 @@ public class AlquilerController {
 		return iPosicion;
 	}
 
-	
-	public boolean add(alquiler Object) {
-		boolean bExito = false;
-		if (Contador < MAXALQUILER && search(Object) == -1) {
-			Array[Contador] = Object;
-			Contador++;
-			bExito = true;
-		}
-		return bExito;
+	@Override
+	public boolean modificar(alquiler oObject) {
+		 boolean bExito=false;
+	        int iPosicion = search(oObject);
+
+	        if(iPosicion != -1) {
+	        	aAlquiler[iPosicion]=oObject;
+	            bExito=true;
+	        }
+	        return bExito;
 	}
-
-	
-	public boolean remove(alquiler Object) {
-		boolean bExito = false;
-		int iPosicion = search(Object);
-		if (iPosicion != -1) {
-			for (int i = iPosicion + 1; i < Contador; i++) {
-				Array[i - 1] = Array[i];
-			}
-			Array[Contador] = null;
-			Contador--;
-			bExito = true;
-		}
-		return bExito;
-	}
-
-
-	public boolean update(alquiler Object) {
-		boolean bExito = false;
-		int iPosicion = search(Object);
-		if (iPosicion != -1) {
-			Array[iPosicion] = Object;
-			bExito = true;
-		}
-		return bExito;
-	}
-
-	
-	public  String mostraralquileres() {
-		int cont = 0;
-		String sMensaje = "";
-		if (getContador() == 0) {
-			sMensaje = "No hay alquiler";
-
-		} else {
-			for (cont = 0; cont < getContador(); cont++) {
-				sMensaje += Array[cont] + "\n";
-			}
-		}
-		return sMensaje;
-	}
-	
 }
